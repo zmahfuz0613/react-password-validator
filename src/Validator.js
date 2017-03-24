@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import "./Validator.css"
 
 class Validator extends Component {
   constructor (props) {
