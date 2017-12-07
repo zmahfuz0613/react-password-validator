@@ -54,8 +54,8 @@ class Validator extends Component {
         <input type="submit" onClick={(e) => this.handleSubmit(e)} value="Submit" />
         <p>{validText}</p>
       </div>
-    );
+    )
   }
 }
 
-export default Validator;
+export default Validator
