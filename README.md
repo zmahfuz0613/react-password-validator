@@ -35,10 +35,9 @@ and presentational components.
 1. Add your form inputs in `Validator.js`. Include inputs for `email`,
    `password`, `passwordConfirm`, and a `submit` button.
 2. Use `useState` to initialize state for each of these fields.
-3. Add methods for handling inputs for password and password confirm, and
-   checking that the passwords match. Be sure to update state in these methods.
-4. Bind the methods in the constructor.
-5. Display a message if the user's inputs are valid.
+3. Add event listeners for handling inputs for password and password confirm, and
+   checking that the passwords match. Be sure to update state in these functions.
+4. Display a message if the user's inputs are valid.
 
 ## Bonus
 
