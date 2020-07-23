@@ -1,22 +1,108 @@
-import React from 'react';
+
+import React from "react";
 import './Validator.css';
 
-function Validator() {
-  return (
-    <div className="form">
-      <h1>Sign Up</h1>
-      <input type="text" value={this.state.input.email}
-              onChange={this.handleChange}
-              class="form-control" 
-              placeholder="Enter email" 
-              id="email" /> />
-      <input type="password" placeholder="password" />
-      <input type="password" placeholder="confirm password" />
-      <input type="submit" value="Submit" class="btn btn-success" />
+const initialState = {
+  email: "",
+  password: "",
+  confirmpassword: "",
+  emailError: "",
+  passwordError: "",
+  confirmpasswordError: ""
+};
 
+export default class Valiatior extends React.Component {
+  state = initialState;
 
-    </div>
-  );
+  handleChange = event => {
+    const isCheckbox = event.target.type === "checkbox";
+    this.setState({
+      [event.target.name]: isCheckbox
+        ? event.target.checked
+        : event.target.value
+    });
+  };
+
+  validate = () => {
+    let emailError = "";
+    let confirmpasswordError = ""
+    let passwordError = ""
+
+    if (this.state.password !== this.state.confirmpassword) {
+     passwordError = "password doesn't match";
+    }
+
+    if (!this.state.email.includes("@")) {
+      emailError = "invalid email";
+    }
+   
+
+    if (emailError || confirmpasswordError) {
+      this.setState({ emailError, confirmpasswordError });
+      return false;
+    } else if (passwordError || confirmpasswordError) {
+      this.setState({ passwordError, confirmpasswordError })
+      return false
+    }
+
+    return true;
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    const isValid = this.validate();
+    if (isValid) {
+      console.log(this.state);
+      // clear form
+      this.setState(initialState);
+    }
+  };
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+
+         <div>
+        <h1> Sign up</h1>
+        </div>
+
+        <div>
+          <input
+            name="email"
+            placeholder="email"
+            value={this.state.email}
+            onChange={this.handleChange}
+          />
+          <div style={{ fontSize: 12, color: "red" }}>
+            {this.state.emailError}
+          </div>
+        </div>
+        <div>
+          <input
+            type="password"
+            name="password"
+            placeholder="password"
+            value={this.state.password}
+            onChange={this.handleChange}
+          />
+          <div style={{ fontSize: 12, color: "red" }}>
+            {this.state.passwordError}
+          </div>
+        </div>
+        <div>
+          <input
+            type="password"
+            name="confirmpassword"
+            placeholder="confirm password"
+            value={this.state.confirmpassword}
+            onChange={this.handleChange}
+          />
+          <div style={{ fontSize: 12, color: "red" }}>
+            {this.state.confirmpasswordError}
+          </div>
+          </div>
+        <button type="submit">submit</button>
+      </form>
+    );
+  }
 }
-
-export default Validator;

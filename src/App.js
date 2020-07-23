@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { Component } from "react";
+import './Validator.css';
 import Validator from './Validator';
 
-function App() {
-  return (
-    <Validator />
-  );
+class App extends Component {
+  state = {
+    visible: true
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <Validator />
+      </div>
+    );
+  }
 }
 
 export default App;
