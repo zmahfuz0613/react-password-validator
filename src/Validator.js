@@ -2,16 +2,19 @@
 import React from "react";
 import './Validator.css';
 
+
+
 const initialState = {
   email: "",
   password: "",
   confirmpassword: "",
   emailError: "",
   passwordError: "",
-  confirmpasswordError: ""
+  confirmpasswordError: "",
+  valid: false
 };
 
-export default class Valiatior extends React.Component {
+export default class Validator extends React.Component {
   state = initialState;
 
   handleChange = event => {
@@ -32,9 +35,9 @@ export default class Valiatior extends React.Component {
      passwordError = "password doesn't match";
     }
 
-    if (!this.state.email.includes("@")) {
-      emailError = "invalid email";
-    }
+    // if (!this.state.email.includes("@")) {
+    //   emailError = "invalid email";
+    // }
    
 
     if (emailError || confirmpasswordError) {
@@ -54,7 +57,9 @@ export default class Valiatior extends React.Component {
     if (isValid) {
       console.log(this.state);
       // clear form
-      this.setState(initialState);
+      this.setState({valid:true});
+    } else {
+      this.setState({valid:false})
     }
   };
 
@@ -102,6 +107,9 @@ export default class Valiatior extends React.Component {
           </div>
           </div>
         <button type="submit">submit</button>
+
+        <h4>{this.state.valid ? 'valid' : 'invalid'}</h4>
+
       </form>
     );
   }
